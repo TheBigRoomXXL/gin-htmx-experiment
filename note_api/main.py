@@ -18,15 +18,13 @@ async def rapidoc():
         <html>
             <head>
                 <meta charset="utf-8">
-                <script 
-                    type="module" 
+                <script
+                    type="module"
                     src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"
                 ></script>
             </head>
             <body>
                 <rapi-doc spec-url="{app.openapi_url}"></rapi-doc>
-            </body> 
+            </body>
         </html>
     """
-
-
