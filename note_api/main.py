@@ -2,11 +2,14 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
 from shared.database import Base, engine
-from note import NoteSchema
+from note import note_router
 
-app = FastAPI()
 
 Base.metadata.create_all(engine)
+
+app = FastAPI()
+app.include_router(note_router)
+
 
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
 async def rapidoc():

@@ -1,1 +1,0 @@
-from note.schema import NoteSchema
