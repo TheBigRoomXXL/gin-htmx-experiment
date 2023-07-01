@@ -5,7 +5,7 @@ import (
 	"gorm.io/gorm"
 )
 
-var DB *gorm.DB
+var Con *gorm.DB
 
 func ConnectDatabase() {
 
@@ -15,5 +15,5 @@ func ConnectDatabase() {
 		panic("Failed to connect to database!")
 	}
 
-	DB = connection
+	Con = connection
 }

@@ -9,7 +9,7 @@ import (
 func main() {
 	//Init DB
 	db.ConnectDatabase()
-	err := db.DB.AutoMigrate(&note.Note{})
+	err := db.Con.AutoMigrate(&note.Note{})
 	if err != nil {
 		return
 	}

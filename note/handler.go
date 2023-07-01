@@ -17,7 +17,7 @@ func CreateNote(c *gin.Context) {
 		return
 	}
 	note := NewNote(input)
-	db.DB.Create(&note)
+	db.Con.Create(&note)
 	c.JSON(http.StatusOK, note)
 }
 
@@ -30,7 +30,7 @@ func QueryNote(c *gin.Context) { // Get model if exist
 	}
 
 	var notes []Note
-	query := db.DB.Select("*")
+	query := db.Con.Select("*")
 	if params.Content != "" {
 		query = query.Where("content LIKE ?", "%"+params.Content+"%")
 	}
@@ -46,7 +46,7 @@ func QueryNote(c *gin.Context) { // Get model if exist
 
 func QueryNoteById(c *gin.Context) { // Get model if exist
 	var note Note
-	result := db.DB.First(&note, 10)
+	result := db.Con.First(&note, 10)
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
 		return
