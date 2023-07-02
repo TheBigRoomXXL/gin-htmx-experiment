@@ -1,10 +1,10 @@
 package note
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/TheBigRoomXXL/note-api/db"
+	"gorm.io/gorm"
 
 	"github.com/gin-gonic/gin"
 )
@@ -22,37 +22,44 @@ func CreateNote(c *gin.Context) {
 }
 
 func QueryNote(c *gin.Context) { // Get model if exist
-	var params NoteQuery
-	if err := c.ShouldBindQuery(&params); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		fmt.Println(err)
+	query, err := prepareQuery(c)
+	if err != nil {
+		c.JSON(422, gin.H{"error": err.Error()})
 		return
 	}
 
 	var notes []Note
+	query.Find(&notes)
+
+	c.JSON(http.StatusOK, notes)
+}
+
+func prepareQuery(c *gin.Context) (*gorm.DB, error) {
+	// Prepare params
+	var params NoteQuery
+	if err := c.ShouldBindQuery(&params); err != nil {
+		return nil, err
+	}
+
+	// Create select statement
 	query := db.Con.Select("*")
 	if params.Content != "" {
 		query = query.Where("content LIKE ?", "%"+params.Content+"%")
 	}
 
-	result := query.Find(&notes)
-	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
-		return
+	// Add pagination
+	paginate, err := db.GetPaginate(c)
+	if err != nil {
+		return nil, err
 	}
-
-	c.JSON(http.StatusOK, notes)
+	return query.Scopes(paginate), nil
 }
 
 func QueryNoteById(c *gin.Context) { // Get model if exist
 	var note Note
-	result := db.Con.First(&note, 10)
-	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
-		return
-	}
-	if result.RowsAffected == 0 {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Record not found"})
+	err := db.Con.First(&note, 100).Error
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 

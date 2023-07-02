@@ -5,6 +5,5 @@ type NoteInput struct {
 }
 
 type NoteQuery struct {
-	ID      string `form:"id"`
 	Content string `form:"content"`
 }

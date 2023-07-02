@@ -16,9 +16,7 @@ func main() {
 
 	//Init Router
 	router := gin.Default()
-	router.GET("/notes", note.QueryNote)
-	router.GET("/notes/:id", note.QueryNoteById)
-	router.POST("/notes", note.CreateNote)
+	note.RegisterRoutes(router)
 
 	// GO!
 	router.Run("localhost:8080")
