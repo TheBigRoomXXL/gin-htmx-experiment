@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>notes</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <br>
+    {{ template "search.html" . }}
+    <form>
+      <textarea
+        name="content"
+        rows="5"
+        placeholder="Start a new note..."
+      ></textarea>
+      <button 
+        hx-post="/notes"
+        hx-swap="afterbegin"
+        hx-target="#notes"
+      >
+        Create
+      </button>
+    </form>
+    <br>
+    {{ template "notes.html" . }}
+  </body>
+</html>

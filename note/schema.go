@@ -1,9 +1,9 @@
 package note
 
-type NoteInput struct {
+type NoteCreate struct {
 	Content string `json:"content" binding:"required"`
 }
 
-type NoteQuery struct {
-	Content string `form:"content"`
+type NoteSearch struct {
+	Search string `form:"search"`
 }
