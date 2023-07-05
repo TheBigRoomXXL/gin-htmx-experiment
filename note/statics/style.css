@@ -1,18 +1,184 @@
-body, form {
+/* Classless.css v1.0
+
+https://github.com/emareg/classlesscss/blob/master/docs/classless.css
+
+Table of Contents:
+ 1. Theme Settings
+ 2. Reset
+ 3. Base Style
+*/
+
+
+/* 1. Theme Settings ––––––––––––––––––––-–––––––––––––– */
+:root, html[data-theme='light'] {
+	--rem: 15pt;
+	--width: 50rem;
+	--navpos: absolute;  /* fixed | absolute */
+	--font-p: 1em/1.7  'Open Sans', 'DejaVu Sans', FreeSans, Helvetica, sans-serif;
+	--font-h: .9em/1.5 'Open Sans', 'DejaVu Sans', FreeSans, Helvetica, sans-serif;
+	--font-c: .9em/1.4 'DejaVu Sans Mono', monospace;
+	--border: 1px solid var(--color-medium);
+	--ornament: "‹‹‹ ›››";
+
+    /* color */
+	--color-text: #433;
+    --color-emphasis: #03BFEE;
+    --color-medium: #bbb;
+    --color-dark: #00323f;
+    --color-link: var(--color-emphasis);
+    --color-background: #fff;
+    --color-background-light: var(--color-medium);
+    --color-background-dark: var(--color-dark);
+}
+
+
+/* 2. Reset –––––––––––––––––––––––––––––––––––––––––––– */
+
+/* reset block elements  */
+* { box-sizing: border-box; border-spacing: 0; margin: 0; padding: 0;}
+header, footer, figure, table, video, details, blockquote,
+ul, ol, dl, fieldset, pre, pre > code, caption {
+	display: block;
+	margin: 0.5rem 0rem 1rem;
+	width: 100%;
+	overflow: auto hidden;
+	text-align: left;
+}
+video, summary, input, select { outline:none; }
+
+/* reset clickable things  (FF Bug: select:hover prevents usage) */
+a, button, select, summary { color: var(--color-link); cursor: pointer; }
+
+
+/* 3. Base Style ––––––––––––––––––––––––––––––––––––––– */
+html { font-size: var(--rem);}
+
+body {
+	position: relative;
+	margin: auto;
+	max-width: var(--width);
+	font: var(--font-p);
+	color: var(--color-text);
+	padding: 3.0rem 0.6rem 0;
+	overflow-x: hidden;
+}
+
+form {
     display: flex;
     flex-direction: column;
 }
 
-input, textarea, button {
-    margin: 0.5em;
+
+p {
+    display: block;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
 }
 
+/* headers */
+h1, h2, h3, h4, h5 { margin: 1.3em 0 .5rem; font: var(--font-h); line-height: 1.2em; clear: both; }
+h1+h2, h2+h3, h3+h4, h4+h5 { margin-top: .5em; padding-top: 0; }  /* non-clashing headings */
+h1 { font-size: 2.2em; font-weight: 350; text-transform: uppercase;}
+h2 { font-size: 2.0em; font-weight: 350; }
+h3 { font-size: 1.5em; font-weight: 400; }
+h4 { font-size: 1.2em; font-weight: 500; }
+h5 { font-size: 1.1em; font-weight: 700; }
+h6 { font-size: 1.0em; font-weight: 700; font-style: italic; display: inline; }
+h6 + p { display: inline; }
+
+/* forms and inputs  */
+textarea, input, button, select {
+	font: var(--font-h);
+	border-radius: 3px;
+	border: 1.5px solid var(--color-medium);
+	margin: 0.5rem;
+    padding: 0.5em;
+}
+
+textarea {
+    overflow: hidden;
+}
+/* button, select {
+	font-weight: bold;
+	background-color: var(--clight);
+	margin: .5em;
+	border: 1.5px solid var(--color-link);
+} */
+/* button { padding: 0.4em 1em; font-size: 85%; letter-spacing: 0.1em; }
+button[disabled]{ color: var(--cdark); border-color: var(--color-medium); }
+fieldset { border-radius: 4px; border: var(--border); padding: .5em 1em;}
+textarea:hover, input:not([type=checkbox]):not([type*='ra']):hover, select:hover{
+  border: 1.5px solid var(--color-emphasis);
+}
+textarea:focus, input:not([type=checkbox]):not([type*='ra']):focus{
+	border: 1.5px solid var(--color-link);
+	box-shadow: 0 0 5px var(--color-link);
+}
+p>button { padding: 0 .5em; margin: 0 .5em; }
+p>select { padding: 0;      margin: 0 .5em; } */
+
+
+/* card */
 .card {
-    color: rgb(50, 50, 50);
+    font-size: small;
     border-width: 1px;
     border-style: solid;
-    padding: 0.2em;
-    margin: 0.5em;
-    white-space: pre-wrap;
-
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin: 0.5rem;
 }
+
+.card > h1, .card > h2 {
+    margin-top: 0.5em
+}
+
+/* code */
+pre > code {
+  margin: 0;
+  position: relative;
+  padding: 0.8em;
+  border-left: .4rem solid var(--color-emphasis);
+}
+code, kbd, samp {
+    color: var(--color-dark);
+	padding: 0.2em;
+	font: var(--font-c);
+	background: var(--color-background-light);
+	border-radius: 4px;
+}
+kbd { border: 1px solid var(--color-medium); }
+
+/* quote */
+blockquote { 
+    border-left: 0.4rem solid var(--color-medium); 
+    padding: 0 0 0 1rem;  
+}
+
+
+/* links */
+a[href]{ text-decoration: underline solid var(--color-medium); text-underline-position: under; }
+a[href^="#"] {text-decoration: none; }
+a:hover, button:not([disabled]):hover, summary:hover {
+	filter: brightness(92%); color: var(--color-emphasis); border-color: var(--color-emphasis);
+}
+
+/* lists */
+ul, ol, dl { margin: 0.5em 0; padding: 0 0 0 2em; }
+li:not(:last-child), dd:not(:last-child) { margin-bottom: 0.5rem; }
+dt { font-weight: bold; }
+
+
+/* tables */
+td, th {
+    padding: 0.5em 0.8em;
+    text-align: right;
+    border-bottom: 0.1rem solid var(--color-medium);
+    white-space: nowrap;
+    font-size: 95%;
+  }
+  thead th[colspan] { padding: .2em 0.8em; text-align: center; }
+  thead tr:not(:only-child) td { padding: .2em 0.8em; }
+  thead+tbody tr:first-child td { border-top: 0.1rem  solid var(--color-background-dark);  }
+  td:first-child, th:first-child { text-align: left; }
+  tr:hover{ background-color: var(--color-background-light); }
+  table img { display: block; }

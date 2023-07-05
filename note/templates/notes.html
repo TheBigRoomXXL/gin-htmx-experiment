@@ -1,5 +1,5 @@
 <div id="notes">
   {{range $note := .notes}}
-    <div class="card">{{ .Content }}</div>
+    <div id="{{.ID}}" class="card">{{ printf "%s" .Html }}</div>
   {{end}}
 </div>

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/TheBigRoomXXL/note-api/db"
+	"github.com/TheBigRoomXXL/note-api/commons/db"
 	"github.com/TheBigRoomXXL/note-api/note"
 	"github.com/gin-gonic/gin"
 )
