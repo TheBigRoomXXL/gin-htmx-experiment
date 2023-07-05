@@ -19,29 +19,12 @@ func RegisterRoutes(router *gin.Engine) {
 			templateFS,
 			"templates/index.html",
 			"templates/search.html",
+			"templates/create.html",
 			"templates/notes.html",
 		))
 
-		var notes []*Note
-		var err error
-		if notes, err = Search(""); err != nil {
-			c.JSON(422, gin.H{"error": err})
-			return
-		}
-
-		t.Execute(c.Writer, gin.H{"notes": &notes})
-	})
-
-	router.GET("/notes", func(c *gin.Context) {
-		t := template.Must(template.ParseFS(templateFS, "templates/notes.html"))
-
-		// Parse input
-		var params NoteSearch
-		c.BindQuery(&params)
-
-		var notes []*Note
-		var err error
-		if notes, err = Search(params.Search); err != nil {
+		notes, err := Search("")
+		if err != nil {
 			c.JSON(422, gin.H{"error": err})
 			return
 		}
@@ -49,14 +32,38 @@ func RegisterRoutes(router *gin.Engine) {
 		t.Execute(c.Writer, gin.H{"notes": notes})
 	})
 
+	router.GET("/notes", func(c *gin.Context) {
+		t := template.Must(template.ParseFS(templateFS, "templates/notes.html"))
+
+		var params NoteSearch
+		if err := c.ShouldBindQuery(&params); err != nil {
+			c.JSON(422, gin.H{"error": err.Error()})
+			return
+		}
+
+		notes, err := Search(params.Search)
+		if err != nil {
+			c.JSON(422, gin.H{"error": err})
+			return
+		}
+
+		t.Execute(c.Writer, gin.H{"notes": &notes})
+	})
+
 	router.POST("/notes", func(c *gin.Context) {
 		t := template.Must(template.ParseFS(templateFS, "templates/notes.html"))
 
-		// Parse input
 		var params NoteCreate
-		c.BindQuery(&params)
+		if err := c.ShouldBind(&params); err != nil {
+			c.JSON(422, gin.H{"error": err.Error()})
+			return
+		}
 
-		note := Create(params.Content)
+		note, err := Create(params.Content)
+		if err != nil {
+			c.JSON(422, gin.H{"error": err})
+			return
+		}
 
 		t.Execute(c.Writer, gin.H{"notes": [1]*Note{note}})
 	})

@@ -6,22 +6,8 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <br>
     {{ template "search.html" . }}
-    <form>
-      <textarea
-        name="content"
-        rows="5"
-        placeholder="Start a new note..."
-      ></textarea>
-      <button 
-        hx-post="/notes"
-        hx-swap="afterbegin"
-        hx-target="#notes"
-      >
-        Create
-      </button>
-    </form>
+    {{ template "create.html" . }}
     <br>
     {{ template "notes.html" . }}
   </body>

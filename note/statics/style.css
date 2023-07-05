@@ -8,10 +8,11 @@ input, textarea, button {
 }
 
 .card {
-    color: rgb(95, 95, 95);
+    color: rgb(50, 50, 50);
     border-width: 1px;
     border-style: solid;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
     padding: 0.2em;
     margin: 0.5em;
+    white-space: pre-wrap;
+
 }

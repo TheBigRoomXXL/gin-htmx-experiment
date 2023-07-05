@@ -1,0 +1,14 @@
+<form>
+  <textarea
+    name="content"
+    rows="5"
+    placeholder="Start a new note..."
+  ></textarea>
+  <button 
+    hx-post="/notes"
+    hx-swap="afterbegin"
+    hx-target="#notes"
+  >
+    Create
+  </button>
+</form>

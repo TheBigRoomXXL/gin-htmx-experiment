@@ -1,25 +1,34 @@
 package note
 
 import (
+	"html"
+
 	"github.com/TheBigRoomXXL/note-api/db"
 	"gorm.io/gorm"
 )
 
 type Note struct {
 	gorm.Model
-	Content string `json:"content"`
+	Content string
 }
 
-func Create(content string) *Note {
-	note := new(Note)
-	note.Content = content
-	db.Con.Create(&note)
-	return note
+func Create(content string) (*Note, error) {
+	escaped_content := html.EscapeString(content)
+	note := Note{Content: escaped_content}
+	err := db.Con.Create(&note).Error
+	if err != nil {
+		return nil, err
+	}
+	return &note, nil
 }
 
-func Search(search string) ([]*Note, error) {
-	var notes []*Note
-	query := db.Con.Select("*").Where("content LIKE ?", "%"+search+"%")
+func Search(search string) (*[]Note, error) {
+	var notes *[]Note
+	query := db.Con.Select("*").
+		Where("content LIKE ?", "%"+search+"%").
+		Limit(10).
+		Order("id DESC")
+
 	err := query.Find(&notes).Error
 	if err != nil {
 		return nil, err

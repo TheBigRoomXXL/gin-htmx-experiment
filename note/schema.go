@@ -1,7 +1,7 @@
 package note
 
 type NoteCreate struct {
-	Content string `json:"content" binding:"required"`
+	Content string `form:"content" binding:"required"`
 }
 
 type NoteSearch struct {

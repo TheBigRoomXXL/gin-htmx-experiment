@@ -19,5 +19,5 @@ func main() {
 	note.RegisterRoutes(router)
 
 	// GO!
-	router.Run("localhost:8080")
+	router.Run("localhost:4000")
 }
