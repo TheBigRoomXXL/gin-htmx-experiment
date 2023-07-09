@@ -18,6 +18,7 @@ func RegisterRoutes(router *gin.Engine) {
 		t := template.Must(template.ParseFS(
 			templateFS,
 			"templates/index.html",
+			"templates/header.html",
 			"templates/search.html",
 			"templates/create.html",
 			"templates/notes.html",

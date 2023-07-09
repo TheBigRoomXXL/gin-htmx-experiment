@@ -1,5 +1,9 @@
-<div id="notes">
-  {{range $note := .notes}}
-    <div id="{{.ID}}" class="card">{{ printf "%s" .Html }}</div>
-  {{end}}
-</div>
+{{range $note := .notes}}
+  <div 
+    id="{{.ID}}"
+    tabindex="0"
+    class="note grid-item"
+  >
+    {{ printf "%s" .Html }}
+  </div>
+{{end}}

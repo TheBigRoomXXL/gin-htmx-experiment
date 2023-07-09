@@ -1,28 +1,31 @@
-<form
-  hx-ext="reset-on-success"
-  hx-post="/notes"
-  hx-swap="afterbegin"
-  hx-target="#notes"
-  hx-reset-on-success
->
+<form>
   <textarea
+    hx-post="/notes"
+    hx-swap="afterbegin"
+    hx-target="#notes"
+    autofocus
+    class="note-sized"
     id="create_note"
     name="content"
     placeholder="Start a new note..."
-    style="min-height: em;"
-  ></textarea>
-  <button type="submit">
-    Create
-  </button>
+  >
+  </textarea>
 </form>
+
+
+
 
 <script>
   function resizeTextarea(event) {
       this.style.height = '24px';
       this.style.height = this.scrollHeight + 12 + 'px';
   }
-  console.log("exist")
+
+  function handleAfterRequest(event) {
+    input.value = "";
+  }
+
   var input = document.querySelector('#create_note');
-  console.log(input)
   input.addEventListener('input', resizeTextarea );
+  input.addEventListener('htmx:afterRequest', handleAfterRequest );
 </script>
