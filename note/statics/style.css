@@ -22,7 +22,7 @@ html[data-theme='light'] {
     --font-c: .9rem/1.4 'DejaVu Sans Mono', monospace;
     --border: 1px solid var(--color-medium);
     --ornament: "‹‹‹ ›››";
-    --note-width: 20rem;
+    --note-width: 27em;
 
     /* color */
     --color-text: #41353a;
