@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/TheBigRoomXXL/note-api/commons/db"
-	"github.com/TheBigRoomXXL/note-api/note"
+	"github.com/TheBigRoomXXL/gin-htmx-experiment/commons/db"
+	"github.com/TheBigRoomXXL/gin-htmx-experiment/note"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,5 +19,5 @@ func main() {
 	note.RegisterRoutes(router)
 
 	// GO!
-	router.Run("localhost:4000")
+	router.Run("0.0.0.0:4000")
 }

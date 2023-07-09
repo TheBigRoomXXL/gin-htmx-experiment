@@ -1,7 +1,7 @@
 package note
 
 import (
-	"github.com/TheBigRoomXXL/note-api/commons/db"
+	"github.com/TheBigRoomXXL/gin-htmx-experiment/commons/db"
 	"github.com/gomarkdown/markdown"
 	"github.com/microcosm-cc/bluemonday"
 	"gorm.io/gorm"

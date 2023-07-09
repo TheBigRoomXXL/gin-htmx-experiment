@@ -1,4 +1,4 @@
-module github.com/TheBigRoomXXL/note-api
+module github.com/TheBigRoomXXL/gin-htmx-experiment
 
 go 1.20
 
