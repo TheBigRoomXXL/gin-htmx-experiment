@@ -6,44 +6,20 @@
     <meta name="description" content="Minimalist and blazingly fast note app" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/style.css">
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="./assets/htmx.min.js"></script>
+    <script src="./assets/app.js"></script>
   </head>
   <body>
     {{ template "header.html" . }}
     {{ template "create.html" . }}
     <main 
-      id="notes" 
-      class="grid"
+    id="notes" 
+    class="grid"
     >
-      {{ template "notes.html" . }}
-    </main>
-  </body>
-
-  <script>
-  // Setup masonry grid with js as it is not supported yet by CSS
-  var main = document.getElementById("notes")
-
-  var masonry = new Masonry(main, {
-    itemSelector: ".grid-item",
-    gutter: 10,
-    isFitWidth: true,
-    transitionDuration: 0,
-  });
-
-  function afterSettle(event) {
-    console.log(event)
-    if (event.detail.requestConfig.verb == "post"){
-      masonry.prepended( main.firstChild );
-    }else {
-      masonry.reloadItems()
-    }
-    masonry.layout()
-  }
-  main.addEventListener('htmx:afterSettle', afterSettle);
-
-
-  </script>
+    {{ template "notes.html" . }}
+  </main>
+</body>
 </html>

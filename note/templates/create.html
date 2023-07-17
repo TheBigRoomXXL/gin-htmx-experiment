@@ -16,16 +16,4 @@
 
 
 <script>
-  function resizeTextarea(event) {
-      this.style.height = '24px';
-      this.style.height = this.scrollHeight + 12 + 'px';
-  }
-
-  function handleAfterRequest(event) {
-    input.value = "";
-  }
-
-  var input = document.querySelector('#create_note');
-  input.addEventListener('input', resizeTextarea );
-  input.addEventListener('htmx:afterRequest', handleAfterRequest );
 </script>

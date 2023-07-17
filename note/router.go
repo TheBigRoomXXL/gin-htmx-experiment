@@ -11,9 +11,7 @@ import (
 var templateFS embed.FS
 
 func RegisterRoutes(router *gin.Engine) {
-
-	router.StaticFile("/favicon.ico", "note/statics/favicon.ico")
-	router.StaticFile("/style.css", "note/statics/style.css")
+	router.Static("/assets", "./note/statics") //path relative to main.go
 	router.GET("/", func(c *gin.Context) {
 		t := template.Must(template.ParseFS(
 			templateFS,
