@@ -1,9 +1,7 @@
 {{range $note := .notes}}
-  <div 
+  <span
     id="{{.ID}}"
     tabindex="0"
-    class="note grid-item"
-  >
-    {{ printf "%s" .Html }}
-  </div>
+    class="note"
+  >{{ printf "%s" .Markdown }}</span>
 {{end}}

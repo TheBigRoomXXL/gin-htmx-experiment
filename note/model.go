@@ -1,6 +1,8 @@
 package note
 
 import (
+	"fmt"
+
 	"github.com/TheBigRoomXXL/gin-htmx-experiment/commons/db"
 	"github.com/gomarkdown/markdown"
 	"github.com/microcosm-cc/bluemonday"
@@ -14,6 +16,7 @@ type Note struct {
 }
 
 func Create(md string) (*Note, error) {
+	fmt.Printf("%#v --END\n", md)
 	maybeUnsafeHTML := markdown.ToHTML([]byte(md), nil, nil)
 	html := bluemonday.UGCPolicy().SanitizeBytes(maybeUnsafeHTML)
 	note := Note{Markdown: md, Html: html}

@@ -22,7 +22,7 @@ html[data-theme='light'] {
     --font-c: .9rem/1.4 'DejaVu Sans Mono', monospace;
     --border: 1px solid var(--color-medium);
     --ornament: "‹‹‹ ›››";
-    --note-width: 27em;
+    --note-width: 26rem;
 
     /* color */
     --color-text: #41353a;
@@ -305,34 +305,30 @@ table img {
 }
 
 .grid {
-	margin: 0 auto; /* this is the css that keeps the container centered in page */
+	margin: 0 auto; /* keeps the container centered in page */
 }
 
-.grid-item {
-    /*base*/
+.note {
     width: var(--note-width);
-    font-size: small;
-    margin-bottom: 10px; /*needed for masonry*/
 
-    /*border*/
+    font-size: small;
+    white-space: pre-line;
+
     border-radius: 3px;
     border: 1.5px solid var(--color-medium);
-}
 
-/* card */
-.note {
-    /*padding*/
+    margin-bottom: 10px; /*needed for masonry*/
     padding-left: 0.5em;
     padding-right: 0.5em;
 
-    /*mex-height*/
+    /*max-height
     display: -webkit-box;
     break-inside: avoid-column;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 15;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: normal;
+    white-space: normal; */
 }
 
 .note > h1,.note > h2 {
