@@ -19,5 +19,5 @@ func main() {
 	note.RegisterRoutes(router)
 
 	// GO!
-	router.Run("0.0.0.0:4000")
+	router.Run("0.0.0.0:3001")
 }
