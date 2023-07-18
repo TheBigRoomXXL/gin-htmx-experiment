@@ -66,4 +66,23 @@ func RegisterRoutes(router *gin.Engine) {
 
 		t.Execute(c.Writer, gin.H{"notes": [1]*Note{note}})
 	})
+	router.PUT("/notes/:id", func(c *gin.Context) {
+		var uri NoteUpdateUri
+		if err := c.ShouldBindUri(&uri); err != nil {
+			c.JSON(422, gin.H{"error": err.Error()})
+			return
+		}
+
+		var body NoteUpdateBody
+		if err := c.ShouldBind(&body); err != nil {
+			c.JSON(422, gin.H{"error": err.Error()})
+			return
+		}
+
+		err := Update(uri.Id, body.Content)
+		if err != nil {
+			c.JSON(422, gin.H{"error": err})
+			return
+		}
+	})
 }

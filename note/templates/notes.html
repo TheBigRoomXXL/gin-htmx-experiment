@@ -1,7 +1,11 @@
 {{range $note := .notes}}
-  <span
+  <textarea
     id="{{.ID}}"
-    tabindex="0"
+    hx-put="/notes/{{.ID}}"
     class="note"
-  >{{ printf "%s" .Markdown }}</span>
+    id="create_note"
+    name="content"
+    rows="1"
+    tabindex="0"
+  >{{ printf "%s" .Markdown }}</textarea>
 {{end}}

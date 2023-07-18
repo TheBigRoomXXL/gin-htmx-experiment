@@ -47,23 +47,6 @@ html[data-theme='light'] {
     padding: 0;
 }
 
-header,footer,figure,table,video,details,blockquote
-,ul,ol,dl,fieldset,pre,pre>code,caption {
-    display: block;
-    margin: 0.5rem 0rem 1rem;
-    width: 100%;
-    overflow: auto hidden;
-    text-align: left;
-}
-
-video,summary,input,select {
-    outline: none;
-}
-
-/* reset clickable things  (FF Bug: select:hover prevents usage) */
-a,button,select,summary {
-    cursor: pointer;
-}
 
 /* 3. Base Style ––––––––––––––––––––––––––––––––––––––– */
 html {
@@ -75,93 +58,25 @@ body {
     margin: auto;
     font: var(--font-p);
     color: var(--color-text);
-    overflow-x: hidden;
 }
 
 menu {
     display: flex;
-    width: 100vw;
     gap: 1em;
     margin-bottom: 1.5rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     background-color: var(--color-primary);
 }
 
 menu > h1 {
+    text-transform: uppercase;
     font-weight: 600;
     color: #fff;
     padding: 0;
-    margin: 0.7rem 0;
 }
-
-p {
-    display: block;
-    font: var(--font-p);
-    margin-block-start: 0.5em;
-    margin-block-end: 0.5em;
-}
-
-a {
-    color: var(--color-link)
-}
-
-/* headers */
-h1,h2,h3,h4,h5 {
-    margin-top: 1.2em;
-    margin-bottom: 0.5em;
-    margin-left: 0.2em;
-    margin-top: 0.2em;
-    font: var(--font-h);
-    line-height: 1.2em;
-    clear: both;
-}
-
-h1+h2,h2+h3,h3+h4,h4+h5 {
-    margin-top: .5em;
-    padding-top: 0;
-}
-
-/* non-clashing headings */
-h1 {
-    font-size: 1.7rem;
-    font-weight: 350;
-    text-transform: uppercase;
-}
-
-h2 {
-    font-size: 1.5rem;
-    font-weight: 350;
-}
-
-h3 {
-    font-size: 1.3rem;
-    font-weight: 400;
-}
-
-h4 {
-    font-size: 1.2rem;
-    font-weight: 500;
-}
-
-h5 {
-    font-size: 1.1rem;
-    font-weight: 700;
-}
-
-h6 {
-    font-size: 1.0rem;
-    font-weight: 700;
-    font-style: italic;
-    display: inline;
-}
-
-h6+p {
-    display: inline;
-}
-
 
 /* forms and inputs  */
 
@@ -177,131 +92,25 @@ search {
     max-width: 30rem;
 }
 
-
-textarea,input,button,select {
-    font: var(--font-p);
-    color: var(--color-text);
-    border-radius: 3px;
-    border: 1.5px solid var(--color-medium);
-    padding: 0.2em 0.5em ;
-    margin: auto;
-    outline: none;
-    resize: none;
-}
-
-form > textarea {
-    margin: 0.5rem 0;
-}
-
 search > input {
-    margin: 0.7rem 0;
     width: 100%;
+    margin: 0.7rem 0;
+    padding: 0 0.5em;
+    color: var(--color-text);
+    font: var(--font-p);
+    /* font-size: medium; */
+    border: 1.5px solid var(--color-medium);
+    outline: none;
+
 }
 
-textarea:focus,input:focus,button:focus,select:focus {
-    border: 2.5px solid var(--color-medium);
+search > input:focus{
+    border: 1.5px solid var(--color-primary);
+    outline: 0.5px solid var(--color-background);
 }
 
 textarea {
-    overflow: hidden;
-}
-
-/* code */
-pre>code {
-    margin: 0;
-    position: relative;
-    padding: 0.8em;
-    border-left: .4rem solid var(--color-primary);
-}
-
-code,kbd,samp {
-    color: var(--color-dark);
-    padding: 0.2em;
-    font: courier var(--font-c);
-    background: var(--color-background-light);
-    border-radius: 4px;
-}
-
-kbd {
-    border: 1px solid var(--color-medium);
-}
-
-/* quote */
-blockquote {
-    border-left: 0.4rem solid var(--color-medium);
-    padding: 0 0 0 1rem;
-}
-
-
-/* links */
-a[href] {
-    text-decoration: underline solid var(--color-medium);
-    text-underline-position: under;
-}
-
-a[href^="#"] {
-    text-decoration: none;
-}
-
-a:hover {
-    filter: brightness(85%);
-    color: var(--color-primary);
-}
-
-/* lists */
-ul,ol,dl {
-    margin: 0.5em 0;
-    padding: 0 0 0 2em;
-}
-
-li:not(:last-child),dd:not(:last-child) {
-    margin-bottom: 0.5rem;
-}
-
-dt {
-    font-weight: bold;
-}
-
-
-/* tables */
-td,th {
-    padding: 0.5em 0.8em;
-    text-align: right;
-    border-bottom: 0.1rem solid var(--color-medium);
-    white-space: nowrap;
-    font-size: 95%;
-}
-
-thead th[colspan] {
-    padding: .2em 0.8em;
-    text-align: center;
-}
-
-thead tr:not(:only-child) td {
-    padding: .2em 0.8em;
-}
-
-thead+tbody tr:first-child td {
-    border-top: 0.1rem solid var(--color-background-dark);
-}
-
-td:first-child,th:first-child {
-    text-align: left;
-}
-
-tr:hover {
-    background-color: var(--color-background-light);
-}
-
-table img {
-    display: block;
-}
-
-
-/*4. Specific styles ---------------------*/
-
-.note-sized {
-    width: var(--note-width);
+    resize: none;
 }
 
 .grid {
@@ -310,16 +119,24 @@ table img {
 
 .note {
     width: var(--note-width);
-
+    
+    color: var(--color-text);
+    font: var(--font-p);
     font-size: small;
     white-space: pre-line;
-
-    border-radius: 3px;
-    border: 1.5px solid var(--color-medium);
 
     margin-bottom: 10px; /*needed for masonry*/
     padding-left: 0.5em;
     padding-right: 0.5em;
+    
+    border: 1.5px solid var(--color-medium);
+    border-radius: 3px;
+}
+
+.note:focus{
+    border-color: var(--color-primary);
+    outline: 1.5px solid var(--color-primary);
+}
 
     /*max-height
     display: -webkit-box;
@@ -329,8 +146,4 @@ table img {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal; */
-}
 
-.note > h1,.note > h2 {
-    margin-top: 0.5em
-}

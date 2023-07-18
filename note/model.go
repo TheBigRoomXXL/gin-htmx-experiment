@@ -16,7 +16,6 @@ type Note struct {
 }
 
 func Create(md string) (*Note, error) {
-	fmt.Printf("%#v --END\n", md)
 	maybeUnsafeHTML := markdown.ToHTML([]byte(md), nil, nil)
 	html := bluemonday.UGCPolicy().SanitizeBytes(maybeUnsafeHTML)
 	note := Note{Markdown: md, Html: html}
@@ -25,6 +24,20 @@ func Create(md string) (*Note, error) {
 		return nil, err
 	}
 	return &note, nil
+}
+
+func Update(id int, md string) error {
+	var note *Note
+	err := db.Con.First(&note, id).Error
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	maybeUnsafeHTML := markdown.ToHTML([]byte(md), nil, nil)
+	note.Html = bluemonday.UGCPolicy().SanitizeBytes(maybeUnsafeHTML)
+	note.Markdown = md
+	db.Con.Updates(note)
+	return nil
 }
 
 func Search(search string) (*[]Note, error) {

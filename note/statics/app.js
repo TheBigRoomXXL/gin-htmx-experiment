@@ -1,7 +1,10 @@
 
 window.addEventListener("load", () => {
-  // Setup masonry grid with js as it is not supported yet by CSS
-  // I would like to replace that dependy by a self-made one later
+  /* Some JS is need to overcode some limitation of HTML and CCS
+      1. CSS does not support proper masonry grid with sorting and height variation
+      2. Textarea cannot auto-resize to user input (why the fuck not?!)
+  */
+
   var main = document.getElementById("notes")
   
   var masonry = new Masonry(main, {
@@ -12,40 +15,45 @@ window.addEventListener("load", () => {
   });
  
   function afterSettle(event) {
-    
     if (event.detail.requestConfig.verb == "post"){
+      resizeTextarea.call(main.firstChild)
       masonry.prepended( main.firstChild );
     }else {
-      masonry.reloadItems()
+      for (textarea of main.children) {
+        resizeTextarea.call(textarea)
+      }
+      masonry.reloadItems();
     }
     masonry.layout()
   }
 
-  function enterEditMode (event) {
-    console.log(event)
-    note = event.target
-    // note.setAttribute("contenteditable", true)
-
-  }
-
-  main.addEventListener("click", enterEditMode)
   main.addEventListener('htmx:afterSettle', (event) => afterSettle(event));
-
-
-
+  
+  
   // Bloody hack because textarea cannot grow automatically with user input
   function resizeTextarea() {
-    this.style.height = '24px';
+    this.style.height = '12px';
     this.style.height = this.scrollHeight + 12 + 'px';
+  }
+  function resizeTextareaAndRefresh() {
+    this.style.height = '12px';
+    this.style.height = this.scrollHeight + 12 + 'px';
+    masonry.layout()
   }
 
   function resetInput() {
-    input.value = "";
+    create_input.value = "";
   }
 
-  var input = document.getElementById('create_note');
-  input.addEventListener('input', resizeTextarea );
-  input.addEventListener('htmx:afterRequest', resetInput );
+  var create_input = document.getElementById('create_note');
+  create_input.addEventListener('htmx:afterRequest', resetInput );
+  
+  textareas = document.querySelectorAll("textarea")
+  textareas.forEach( textarea => {
+    textarea.style.height = textarea.scrollHeight + 12 + 'px';
+    textarea.addEventListener('input', resizeTextareaAndRefresh );
+  });
+  masonry.layout()
 });
 
 
